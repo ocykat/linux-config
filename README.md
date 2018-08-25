@@ -5,6 +5,7 @@ This repository stores the configurations for my Debian machine.
 
 
 ## System Info
+
 * **OS**: Debian Linux 9.5 (Stretch)
 * **DE**: xfce
 
@@ -14,6 +15,7 @@ This repository stores the configurations for my Debian machine.
 To avoid having to setup `sudo`, simply **do not specify a root password while installing.**
 
 To enable `sudo`, follow these steps in the terminal:
+
 ```
 su
 # insert your root password when prompted
@@ -22,10 +24,11 @@ adduser <username> sudo
 ```
 
 
-## Installing Applications
+## Install Applications
 
 Before installing applications with `apt`, it is a good idea to run the
 following commands:
+
 ```
 sudo apt update
 sudo apt upgrade
@@ -40,7 +43,13 @@ sudo apt install checkinstall
 * **`cmake`**
 
 ```
-sudo apt install checkinstall
+sudo apt install cmake
+```
+
+* **`curl`**
+
+```
+sudo apt install curl
 ```
 
 
@@ -52,8 +61,16 @@ sudo apt install ibus-unikey
 
 
 * **`intel-microcode`**
+
 ```
 sudo apt install intel-microcode
+```
+
+
+* **`geany`**
+
+```
+sudo apt install geany
 ```
 
 
@@ -69,6 +86,10 @@ sudo apt install git
 ```
 sudo apt install guake
 ```
+
+* **`java jdk`**
+
+[Full instruction](https://wiki.debian.org/JavaPackage)
 
 
 * **`nodejs`**
