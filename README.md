@@ -139,3 +139,21 @@ sudo apt install zsh
 ```
 
 To install `oh-my-zsh`, follow this [link](https://github.com/robbyrussell/oh-my-zsh).
+
+
+## Prevent packages from auto-upgrade
+
+To prevent a package from auto-upgrade:
+```
+sudo apt-mark hold package_name
+```
+
+To check which packages are being hold:
+```
+sudo dpkg --get-selections | grep "hold"
+```
+
+To re-enable auto-upgrade:
+```
+sudo apt-mark unhold package_name
+```
