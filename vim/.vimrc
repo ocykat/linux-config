@@ -5,8 +5,14 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
 Plug 'lifepillar/vim-solarized8'
+Plug 'altercation/vim-colors-solarized'
 Plug 'tomasr/molokai'
 Plug 'crusoexia/vim-monokai'
+Plug 'endel/vim-github-colorscheme'
+Plug 'rakr/vim-one'
+Plug 'Addisonbean/Vim-Xcode-Theme'
+Plug 'cohlin/vim-colorschemes'
+Plug 'romainl/flattened'
 
 " SYNTAX-HIGHLIGHTING
 Plug 'sheerun/vim-polyglot'
@@ -28,7 +34,6 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'scrooloose/nerdcommenter'
 " indentLine for indent lines
 Plug 'Yggdroot/indentLine'
-
 
 call plug#end()
 
@@ -85,59 +90,15 @@ else
 endif
 
 
+" COPY AND PASTE
+" Make vim use the system clipboard
+"set clipboard=unnamed     " for Windows
+set clipboard=unnamedplus " for Linux
+
+
 " ERROR BELLS
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
-
-
-" CONCEAL
-set conceallevel=0
-
-
-" ============= Customize: LANGUAGES  ============
-function! SETUP_LANG_HTML()
-  setlocal tabstop=2
-  setlocal shiftwidth=2
-  setlocal softtabstop=2
-endfunction
-autocmd FileType html     call SETUP_LANG_HTML()
-
-function! SETUP_LANG_PASCAL()
-  setlocal tabstop=2
-  setlocal shiftwidth=2
-  setlocal softtabstop=2
-endfunction
-autocmd FileType pas     call SETUP_LANG_PASCAL()
-
-function! SETUP_LANG_TEX()
-  setlocal tabstop=2
-  setlocal shiftwidth=2
-  setlocal softtabstop=2
-endfunction
-autocmd FileType tex      call SETUP_LANG_TEX()
-autocmd FileType latex    call SETUP_LANG_TEX()
-autocmd FileType plaintex call SETUP_LANG_TEX()
-
-function! SETUP_LANG_VERILOG()
-  setlocal tabstop=2
-  setlocal shiftwidth=2
-  setlocal softtabstop=2
-endfunction
-autocmd FileType verilog  call SETUP_LANG_VERILOG()
-
-function! SETUP_LANG_VIM()
-  setlocal tabstop=2
-  setlocal shiftwidth=2
-  setlocal softtabstop=2
-endfunction
-autocmd FileType vim      call SETUP_LANG_VIM()
-
-function! SETUP_LANG_TXT()
-  setlocal tabstop=2
-  setlocal shiftwidth=2
-  setlocal softtabstop=2
-endfunction
-autocmd FileType text     call SETUP_LANG_TXT()
 
 
 " ============= Customize: PLUGINS     ============
@@ -158,40 +119,42 @@ let g:ycm_autoclose_preview_window_after_insertion = 1
 
 
 " INDENTLINE
-" Disable
-let g:indentLine_enable = 0
+let g:indentLine_char='┆'
+
+" POLYGLOT
+let g:polyglot_disabled = ['latex', 'python']
 
 
 " ============= Customize: GUI        ============
-colorscheme onedark
-let g:airline_theme='onedark'
+" TERMINAL VIM
+" Dark selection
+set background=light
+colorscheme xcode-default
+let g:airline_theme='edocx'
 
+" Light selection
+"set background=dark
+"colorscheme onedark
+"let g:airline_theme='onedark'
+
+
+" GVIM
 if has('gui_running')
   " THEME
   " Light/Dark
-  "set background=light
   set background=dark
 
   " Theme
-  "colorscheme mylight
   colorscheme onedark
-  "colorscheme solarized8
-  "colorscheme molokai
-  "colorscheme monokai
-  "colorscheme gruvbox
 
   " Airline
-  "let g:airline_theme='papercolor'
-  "let g:airline_theme='onedark'
-  let g:airline_theme='solarized'
-  "let g:airline_theme='gruvbox'
-  "let g:airline_theme='molokai'
+  let g:airline_theme='onedark'
 
   " MAXIMIZE WINDOW
   set lines=999 columns=999
 
   " FONT
-  set guifont=Monospace\ Regular\ 11
+  set guifont=Inconsolata \12
   "set guifont=Ubuntu\ Mono\ 11
 
   " HIDE UNNECESSARY GUI FEATURES
@@ -201,3 +164,68 @@ if has('gui_running')
   set guioptions-=L  "left scrollbar
 endif
 
+
+" ============= Customize: KEY-BINDING     ============
+" SYNTAX-HIGHLIGHTING GROUP DETECTING
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
+
+" ENTER PASTE MODE
+set pastetoggle=<F3>
+
+
+" ============= Customize: LANGUAGES  ============
+function! SET_INDENTATION_2()
+  setlocal tabstop=2
+  setlocal shiftwidth=2
+  setlocal softtabstop=2
+endfunction
+
+function! SETUP_LANG_HTML()
+  call SET_INDENTATION_2()
+endfunction
+autocmd FileType html      call SETUP_LANG_HTML()
+
+function! SETUP_LANG_MARKDOWN()
+  call SET_INDENTATION_2()
+  let indentLine_enabled=0
+  set conceallevel=0
+endfunction
+autocmd FileType markdown call SETUP_LANG_MARKDOWN()
+
+function! SETUP_LANG_PASCAL()
+  call SET_INDENTATION_2()
+endfunction
+autocmd FileType pas      call SETUP_LANG_PASCAL()
+
+function! SETUP_LANG_TEX()
+  call SET_INDENTATION_2()
+  let indentLine_enabled=0
+  set conceallevel=0
+  nmap <F9> :!pdflatex main.tex<CR>
+endfunction
+autocmd FileType tex      call SETUP_LANG_TEX()
+autocmd FileType latex    call SETUP_LANG_TEX()
+autocmd FileType plaintex call SETUP_LANG_TEX()
+
+function! SETUP_LANG_VERILOG()
+  call SET_INDENTATION_2()
+endfunction
+autocmd FileType verilog  call SETUP_LANG_VERILOG()
+
+function! SETUP_LANG_VIM()
+  call SET_INDENTATION_2()
+endfunction
+autocmd FileType vim      call SETUP_LANG_VIM()
+
+function! SETUP_LANG_TXT()
+  call SET_INDENTATION_2()
+endfunction
+autocmd FileType text     call SETUP_LANG_TXT()
