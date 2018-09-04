@@ -87,6 +87,11 @@ sudo apt install git
 sudo apt install guake
 ```
 
+
+* **`intellij`**
+Check the intellij directory.
+
+
 * **`java jdk`**
 
 [Full instruction](https://wiki.debian.org/JavaPackage)
@@ -130,6 +135,12 @@ sudo apt install tmux
 The best way to obtain `vim` is to build it from source, following
 [this](https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source)
 instruction.
+
+
+* **`zathura`**
+```
+sudo apt install zathura
+```
 
 
 * **`zsh`**
