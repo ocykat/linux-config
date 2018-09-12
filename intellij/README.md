@@ -9,7 +9,7 @@ with the system files.
 To install IntelliJ, run these commands:
 
 ```
-sudo tar xf ideaIC-<version>.tar.gz
+sudo tar xf ideaIC-<version>.tar.gz -C /opt/
 cd /opt/idea-IC-<...>/bin
 ./idea.sh
 ```
