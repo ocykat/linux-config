@@ -21,13 +21,9 @@ Plug 'sheerun/vim-polyglot'
 Plug 'Valloric/YouCompleteMe'
 
 " GUI ENHANCEMENTS
-" Vim tabbar
-"Plug 'drmingdrmer/vim-tabbar'
 " vim-airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-" vim-workspace
-"Plug 'bagrat/vim-workspace'
 
 " EDITOR
 " NerdCommenter for quick commenting
@@ -96,9 +92,17 @@ endif
 set clipboard=unnamedplus " for Linux
 
 
+" REMOVE TRAILING WHITESPACES
+autocmd BufWritePre *.py :%s/\s\+$//e
+
+
 " ERROR BELLS
 set noerrorbells visualbell t_vb=
 autocmd GUIEnter * set visualbell t_vb=
+
+
+" SET LATEX FILETYPE TO latex ONLY
+let g:tex_flavor='latex'
 
 
 " ============= Customize: PLUGINS     ============
@@ -110,13 +114,12 @@ let g:ycm_min_num_of_chars_for_completion = 2
 let g:ycm_seed_identifiers_with_syntax = 1
 let g:ycm_show_diagnostics_ui = 0
 " C, C++, Obj-C
-let g:ycm_global_ycm_extra_conf = "~/.vim/custom/.ycm_extra_conf.py"
+let g:ycm_global_ycm_extra_conf = "~/.vim/custom/ycm/.ycm_extra_conf.py"
 " Python
 let g:ycm_python_binary_path = '/usr/bin/python3'
 " Closing unnecessary windows
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
-
 
 " INDENTLINE
 let g:indentLine_char='┆'
@@ -128,33 +131,31 @@ let g:polyglot_disabled = ['latex', 'python']
 " ============= Customize: GUI        ============
 " TERMINAL VIM
 " Dark selection
+"set background=light
 set background=light
-colorscheme xcode-default
+"colorscheme xcode-default
+"colorscheme bluecandy
+colorscheme monday-rain
 let g:airline_theme='edocx'
-
-" Light selection
-"set background=dark
-"colorscheme onedark
-"let g:airline_theme='onedark'
 
 
 " GVIM
 if has('gui_running')
   " THEME
   " Light/Dark
-  set background=dark
+  set background=light
 
   " Theme
-  colorscheme onedark
+  colorscheme xcode-default
 
   " Airline
-  let g:airline_theme='onedark'
+  let g:airline_theme='edocx'
 
   " MAXIMIZE WINDOW
   set lines=999 columns=999
 
   " FONT
-  set guifont=Inconsolata \12
+  set guifont=Inconsolata:h16
   "set guifont=Ubuntu\ Mono\ 11
 
   " HIDE UNNECESSARY GUI FEATURES
@@ -181,6 +182,19 @@ endfunc
 set pastetoggle=<F3>
 
 
+" INDENT KEEPING SELECTION
+vmap < <gv
+vmap > >gv
+
+
+" RELOAD VIMRC
+map <F12> :source $MYVIMRC<CR>
+
+
+" OPEN MY THEME
+map <c-s-o> :vsplit ~/.vim/colors/monday-rain.vim<CR>
+
+
 " ============= Customize: LANGUAGES  ============
 function! SET_INDENTATION_2()
   setlocal tabstop=2
@@ -195,8 +209,7 @@ autocmd FileType html      call SETUP_LANG_HTML()
 
 function! SETUP_LANG_MARKDOWN()
   call SET_INDENTATION_2()
-  let indentLine_enabled=0
-  set conceallevel=0
+  let b:indentLine_enabled=0
 endfunction
 autocmd FileType markdown call SETUP_LANG_MARKDOWN()
 
@@ -207,9 +220,10 @@ autocmd FileType pas      call SETUP_LANG_PASCAL()
 
 function! SETUP_LANG_TEX()
   call SET_INDENTATION_2()
-  let indentLine_enabled=0
-  set conceallevel=0
-  nmap <F9> :!pdflatex main.tex<CR>
+  let b:indentLine_enabled=0
+  hi Error NONE
+  hi ErrorMsg NONE
+  nmap <F9> :w<CR>:!./make.sh<CR>
 endfunction
 autocmd FileType tex      call SETUP_LANG_TEX()
 autocmd FileType latex    call SETUP_LANG_TEX()
