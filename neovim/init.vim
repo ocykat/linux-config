@@ -7,7 +7,9 @@ Plug 'crusoexia/vim-monokai'
 Plug 'joshdick/onedark.vim'
 
 " AUTOCOMPLETION
-Plug 'Shougo/deoplete.nvim'
+" deoplete Plug 'Shougo/deoplete.nvim'
+" C++
+Plug 'tweekmonster/deoplete-clang2'
 
 " SNIPPETS
 Plug 'Shougo/neosnippet.vim'
@@ -99,6 +101,11 @@ function! SET_INDENTATION_2()
   setlocal shiftwidth=2
   setlocal softtabstop=2
 endfunction
+
+function! SETUP_LANG_ASM()
+  call SET_INDENTATION_2()
+endfunction
+autocmd FileType asm      call SETUP_LANG_ASM()
 
 function! SETUP_LANG_HTML()
   call SET_INDENTATION_2()

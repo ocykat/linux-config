@@ -68,13 +68,26 @@ fi
 
 export EDITOR='vim'
 
-# Alias
+# Fix nvim conflicts
+export VTE_VERSION="100"
+
+# tmuxinator
+source ~/.bin/tmuxinator.zsh
+
+# alias
+alias open='xdg-open'
 alias tmux='tmux -2'
 alias subl='/opt/sublime_text_3/sublime_text'
 alias mars='~/programs/mars/mars'
+alias mux='tmuxinator'
+alias clion='/opt/clion-2018.3.2/bin/clion.sh &'
+alias sudo_clion='/opt/clion-2018.3.2/bin/clion.sh &'
 
-# Fix nvim conflicts
-export VTE_VERSION="100"
+# Base16 Shell
+#BASE16_SHELL="$HOME/.config/base16-shell/"
+#[ -n "$PS1" ] && \
+    #[ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        #eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 
 # export MANPATH="/usr/local/man:$MANPATH"
