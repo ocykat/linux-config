@@ -8,4 +8,4 @@ yes | cp -rf neovim/init.vim ~/.config/nvim/init.vim
 yes | cp -rf tmux/.tmux.conf ~/.tmux.conf 
 
 # zshrc
-yes | cp -rf zshrc/.zshrc ~/.zshrc 
+yes | cp -rf zsh/.zshrc ~/.zshrc 
