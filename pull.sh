@@ -9,3 +9,6 @@ yes | cp -rf tmux/.tmux.conf ~/.tmux.conf
 
 # zshrc
 yes | cp -rf zsh/.zshrc ~/.zshrc 
+
+# zshrc
+yes | cp -rf zathura/zathurarc ~/.config/zathura/zathurarc 
