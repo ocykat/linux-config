@@ -5,7 +5,22 @@
 export ZSH="/home/nhat/.oh-my-zsh"
 
 # More themes: https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="frisk"
+#ZSH_THEME="sobole"
+ZSH_THEME="powerlevel9k/powerlevel9k"
+
+POWERLEVEL9K_MODE="nerdfont-complete"
+
+POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="➩ "
+POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
+
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_debian_icon dir)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vcs time)
+
+POWERLEVEL9K_CUSTOM_DEBIAN_ICON="echo "
+POWERLEVEL9K_CUSTOM_DEBIAN_ICON_FOREGROUND=015
+POWERLEVEL9K_CUSTOM_DEBIAN_ICON_BACKGROUND=000
+
 
 # Case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -77,6 +92,7 @@ source ~/.bin/tmuxinator.zsh
 # alias
 alias open='xdg-open'
 alias tmux='tmux -2'
+#alias tmux='TERM=screen-256color-bce tmux'
 alias subl='/opt/sublime_text_3/sublime_text'
 alias mars='~/programs/mars/mars'
 alias mux='tmuxinator'

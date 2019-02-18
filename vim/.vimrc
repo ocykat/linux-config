@@ -2,18 +2,16 @@
 call plug#begin('~/.vim/plugged')
 
 " THEMES
-Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
 Plug 'lifepillar/vim-solarized8'
 Plug 'altercation/vim-colors-solarized'
 Plug 'tomasr/molokai'
 Plug 'crusoexia/vim-monokai'
-Plug 'endel/vim-github-colorscheme'
-Plug 'rakr/vim-one'
 Plug 'Addisonbean/Vim-Xcode-Theme'
 Plug 'cohlin/vim-colorschemes'
 Plug 'romainl/flattened'
 Plug 'chriskempson/base16-vim'
+Plug 'ocykat/muse.vim'
 
 " SYNTAX-HIGHLIGHTING
 Plug 'sheerun/vim-polyglot'
@@ -131,13 +129,13 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " COLORSCHEME
 syntax on
 " Light
-set background=light
-colorscheme muse
-let g:airline_theme='papercolor'
+"set background=light
+"colorscheme muse
+"let g:airline_theme='papercolor'
 " Dark
-"set background=dark
-"colorscheme solarized8
-"let g:airline_theme='solarized'
+set background=dark
+colorscheme onedark
+let g:airline_theme='onedark'
 
 " GVIM
 if has('gui_running')
