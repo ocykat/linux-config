@@ -162,6 +162,8 @@ sudo apt-mark hold package_name
 To check which packages are being hold:
 ```
 sudo dpkg --get-selections | grep "hold"
+# or
+sudo apt-mark showhold
 ```
 
 To re-enable auto-upgrade:

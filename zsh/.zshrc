@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 export ZSH="/home/nhat/.oh-my-zsh"
 
@@ -74,7 +71,11 @@ source $ZSH/oh-my-zsh.sh
 
 
 # User configuration
+export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=/sbin:$PATH
+
 export PATH="$HOME/neovim/bin:$PATH"
+
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv 1>/dev/null 2>&1; then

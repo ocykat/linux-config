@@ -26,9 +26,9 @@ Plug 'vim-airline/vim-airline-themes'
 
 " EDITOR
 " NerdCommenter for quick commenting
-Plug 'scrooloose/nerdcommenter'
+" Plug 'scrooloose/nerdcommenter'
 " indentLine for indent lines
-Plug 'Yggdroot/indentLine'
+" Plug 'Yggdroot/indentLine'
 
 call plug#end() 
 
@@ -108,8 +108,8 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
 
-" INDENTLINE
-let g:indentLine_char='┆'
+"" INDENTLINE
+"let g:indentLine_char='┆'
 
 " POLYGLOT
 let g:polyglot_disabled = ['latex']
@@ -177,7 +177,6 @@ endfunc
 " ENTER PASTE MODE
 set pastetoggle=<F3>
 
-
 " INDENT KEEPING SELECTION
 vmap < <gv
 vmap > >gv
@@ -187,6 +186,21 @@ map <F12> :source $MYVIMRC<CR>
 
 " OPEN MY THEME
 map <c-s-o> :vsplit ~/.vim/colors/muse.vim<CR>
+
+" VIETNAMESE
+let s:VietnameseKeymapON = 0
+
+function! ToggleVietnameseKeymap()
+  if s:VietnameseKeymapON
+    set keymap=
+    let s:VietnameseKeymapON = 0
+  else
+    set keymap=vietnamese-vni_utf-8
+    let s:VietnameseKeymapON = 1
+  endif
+endfunction
+
+map <F8> :call ToggleVietnameseKeymap()<CR>
 
 " ======== SPECIFIC LANGUAGE SETTINGS =========
 function! SmallIndent()
@@ -203,7 +217,6 @@ autocmd FileType html     call LangHtml()
 
 function! LangMarkdown()
   call SmallIndent()
-  let b:indentLine_enabled=0
 endfunction
 autocmd FileType markdown call LangMarkdown()
 
