@@ -1,3 +1,6 @@
+# emacs
+yes | cp -rf ~/.emacs.d/init.el emacs/init.el
+
 # vim
 yes | cp -rf ~/.vimrc vim/.vimrc
 

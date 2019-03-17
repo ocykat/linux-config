@@ -30,7 +30,7 @@ Plug 'vim-airline/vim-airline-themes'
 " indentLine for indent lines
 " Plug 'Yggdroot/indentLine'
 
-call plug#end() 
+call plug#end()
 
 " ============== Customize: Editor ===============
 " FILE TYPE DETECTION
@@ -54,6 +54,10 @@ set tabstop=4      " hard tab stop
 set shiftwidth=4   " when indenting with '>', add 4 spaces
 set softtabstop=4  " soft tab stop
 set expandtab      " on pressing tab, insert 4 spaces
+
+" WORD WRAPPING
+set wrap
+set linebreak
 
 " BACKSPACE PROBLEM FIX
 set backspace=indent,eol,start
@@ -83,7 +87,7 @@ set colorcolumn=80
 set clipboard=unnamedplus " for Linux
 
 " REMOVE TRAILING WHITESPACES
-autocmd BufWritePre *.py :%s/\s\+$//e
+autocmd BufWritePre * %s/\s\+$//e
 
 " ERROR BELLS
 set noerrorbells visualbell t_vb=
@@ -129,9 +133,9 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " COLORSCHEME
 syntax on
 " Light
-"set background=light
-"colorscheme muse
-"let g:airline_theme='papercolor'
+" set background=light
+" colorscheme muse
+" let g:airline_theme='papercolor'
 " Dark
 set background=dark
 colorscheme onedark
@@ -203,31 +207,43 @@ endfunction
 map <F8> :call ToggleVietnameseKeymap()<CR>
 
 " ======== SPECIFIC LANGUAGE SETTINGS =========
-function! SmallIndent()
-  setlocal tabstop=2
-  setlocal shiftwidth=2
-  setlocal softtabstop=2
-  setlocal expandtab
+function! SetIndentSize(indentsize)
+  let &l:tabstop = a:indentsize
+  let &l:shiftwidth = a:indentsize
+  let &l:softtabstop = a:indentsize
+endfunction
+
+function! SetDocMovement()
+  vmap <C-j> gj
+  vmap <C-k> gk
+  vmap <C-4> g$
+  vmap <C-0> g^
+  nmap <C-j> gj
+  nmap <C-k> gk
+  nmap <C-4> g$
+  nmap <C-0> g^
 endfunction
 
 function! LangHtml()
-  call SmallIndent()
+  call SetIndentSize(2)
 endfunction
 autocmd FileType html     call LangHtml()
 
 function! LangMarkdown()
-  call SmallIndent()
+  call SetIndentSize(2)
+  call SetDocMovement()
 endfunction
 autocmd FileType markdown call LangMarkdown()
 
 function! LangPascal()
-  call SmallIndent()
+  call SetIndentSize(2)
 endfunction
 autocmd FileType pascal   call LangPascal()
 
 function! LangTex()
-  call SmallIndent()
-  setlocal tw=79
+  call SetIndentSize(2)
+  call SetDocMovement()
+  " setlocal textwidth=79
   hi Error NONE
   hi ErrorMsg NONE
   nmap <F9> :w<CR>:!latexmk<space>-pdf<space>main.tex<CR>
@@ -238,6 +254,6 @@ autocmd FileType latex    call LangTex()
 autocmd FileType plaintex call LangTex()
 
 function! LangVim()
-  call SmallIndent()
+  call SetIndentSize(2)
 endfunction
-autocmd FileType vim      call SmallIndent()
+autocmd FileType vim      call LangVim()
