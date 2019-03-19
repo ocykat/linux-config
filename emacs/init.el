@@ -13,8 +13,8 @@
 
 ;; "use-package" - install other packages
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+    (package-refresh-contents)
+    (package-install 'use-package))
 
 ;; "try" - try other packages
 (use-package try
@@ -61,27 +61,54 @@
 ;; "helm" - incremental completion
 
 ;; EDITOR {{{
-;; Font
+;; == Font ==
 (set-frame-font "Hack Nerd Font 11" nil t)
-;; Line numbers
+
+;; == Line numbers ==
 (global-linum-mode t)
 
-;; Indentation
-;; I do not use tab for indentation
+;; == Word wrap ==
+(global-visual-line-mode t)
+
+;; == Indentation ==
+;; * Use spaces for indentation
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (setq indent-line-function 'insert-tab)
+;; * C++ indentation setting
+(defun my-c++-mode-hook ()
+    (setq c-basic-offset 4)
+    (c-set-offset 'substatement-open 0))
+(add-hook 'c++-mode-hook 'my-c++-mode-hook)
 
-;; Resolve conflict of using tab for both indentation and auto-completion
+;; * Shifting block keeping selection
+(define-key evil-visual-state-map (kbd ">") 'my-evil-shift-right-visual)
+(define-key evil-visual-state-map (kbd "<") 'my-evil-shift-left-visual)
+;; (define-key evil-visual-state-map [tab] 'my-evil-shift-right-visual)
+;; (define-key evil-visual-state-map [S-tab] 'my-evil-shift-left-visual)
+
+(defun my-evil-shift-left-visual ()
+    (interactive)
+    (evil-shift-left (region-beginning) (region-end))
+    (evil-normal-state)
+    (evil-visual-restore))
+
+(defun my-evil-shift-right-visual ()
+    (interactive)
+    (evil-shift-right (region-beginning) (region-end))
+    (evil-normal-state)
+    (evil-visual-restore))
+
+;; * Resolve conflict of using tab for both indentation and auto-completion
 (defun tab-indent-or-complete ()
-  (interactive)
-  (if (minibufferp)
-      (minibuffer-complete)
-    (if (or (not yas-minor-mode)
-            (null (do-yas-expand)))
-        (if (check-expansion)
-            (company-complete-common)
-          (indent-for-tab-command)))))
+    (interactive)
+    (if (minibufferp)
+        (minibuffer-complete)
+        (if (or (not yas-minor-mode)
+                (null (do-yas-expand)))
+            (if (check-expansion)
+                (company-complete-common)
+            (indent-for-tab-command)))))
 
 (global-set-key [backtab] 'tab-indent-or-complete)
 
@@ -101,6 +128,7 @@
 ;; CURSOR {{{
 ;; Disable cursor blinking
 (blink-cursor-mode 0)
+
 ;; Evil-mode cursor
 (setq evil-insert-state-cursor '(box "grey")
       evil-normal-state-cursor '(box "purple")
@@ -116,8 +144,9 @@
       inhibit-startup-message t
       inhibit-startup-echo-area-message t)
 
-;; Disable backup files
+;; Disable backup~ and #autosave# files
 (setq make-backup-files nil)
+(setq auto-save-default nil)
 
 ;; Set custom-file so that emacs will not create garbage in my init file
 (setq custom-file "~/.emacs.d/custom.el")
