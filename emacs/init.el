@@ -2,7 +2,16 @@
 ;; Package archives
 (require 'package)
 ;; (setq package-enable-at-startup nil)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+
+; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/")
+;                                '("gnu" . "https://elpa.gnu.org/packages/")
+;                                '("org" . "http://orgmode.org/elpa/"))
+
+(setq package-archives
+      '(("melpa" . "https://melpa.org/packages/")
+        ("gnu" . "https://elpa.gnu.org/packages/")
+        ("org" . "http://orgmode.org/elpa/")))
+
 (package-initialize)
 
 ;; "evil" - Evil mode, the cure for my Vim addiction
@@ -51,14 +60,17 @@
         (global-company-mode)
     :config
         (setq company-dabbrev-downcase nil)
-        (setq company-idle-delay 0.25)
+        (setq company-idle-delay 0.1)
         (setq company-selection-wrap-around t)
         (define-key company-active-map (kbd "ESC") 'company-abort)
         (define-key company-active-map [tab] 'company-complete-common-or-cycle)
         (define-key company-active-map (kbd "C-n") 'company-select-next)
         (define-key company-active-map (kbd "C-p") 'company-select-previous))
 
-;; "helm" - incremental completion
+;; "org-bullets" - enhanced UI for orgmode
+(add-to-list 'load-path "~/.emacs.d/packages/")
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 
 ;; EDITOR {{{
 ;; == Font ==

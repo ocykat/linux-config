@@ -15,7 +15,7 @@ POWERLEVEL9K_MULTILINE_LAST_PROMPT_PREFIX="➩ "
 POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=""
 
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_debian_icon dir)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vcs time)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(vcs virtualenv time)
 
 POWERLEVEL9K_CUSTOM_DEBIAN_ICON="echo "
 POWERLEVEL9K_CUSTOM_DEBIAN_ICON_FOREGROUND=015
@@ -65,9 +65,8 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Format: plugins=(rails git textmate ruby lighthouse)
 # Too many plugins slow down shell startup.
-plugins=(
-  git
-)
+source ~/.oh-my-zsh/plugins/git/git.plugin.zsh
+plugins=(git, python)
 
 
 source $ZSH/oh-my-zsh.sh
@@ -89,6 +88,7 @@ export EDITOR='vim'
 
 # Fix nvim conflicts
 export VTE_VERSION="100"
+
 
 # tmuxinator
 source ~/.bin/tmuxinator.zsh

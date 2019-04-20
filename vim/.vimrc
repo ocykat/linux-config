@@ -26,7 +26,9 @@ Plug 'vim-airline/vim-airline-themes'
 
 " EDITOR
 " NerdCommenter for quick commenting
-" Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdcommenter'
+" Aligning equal signs
+Plug 'godlygeek/tabular'
 " indentLine for indent lines
 " Plug 'Yggdroot/indentLine'
 
@@ -108,6 +110,7 @@ let g:ycm_show_diagnostics_ui = 0
 let g:ycm_global_ycm_extra_conf = "~/.vim/custom/ycm/.ycm_extra_conf.py"
 " Python
 let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_confirm_extra_conf = 0
 " Closing unnecessary windows
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_autoclose_preview_window_after_insertion = 1
@@ -133,13 +136,13 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " COLORSCHEME
 syntax on
 " Light
-" set background=light
-" colorscheme muse
-" let g:airline_theme='papercolor'
+set background=light
+colorscheme muse
+ let g:airline_theme='papercolor'
 " Dark
-set background=dark
-colorscheme onedark
-let g:airline_theme='onedark'
+"set background=dark
+"colorscheme solarized
+"let g:airline_theme='solarized'
 
 " GVIM
 if has('gui_running')
