@@ -65,8 +65,9 @@ HIST_STAMPS="dd.mm.yyyy"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Format: plugins=(rails git textmate ruby lighthouse)
 # Too many plugins slow down shell startup.
-source ~/.oh-my-zsh/plugins/git/git.plugin.zsh
-plugins=(git, python)
+# source ~/.oh-my-zsh/plugins/git/git.plugin.zsh
+ZSH_DISABLE_COMPFIX=true
+plugins=(git python)
 
 
 source $ZSH/oh-my-zsh.sh
